@@ -47,7 +47,6 @@ class TechsController < ApplicationController
     end
   end
 
-
   patch '/techs/:id' do
     redirect_if_not_logged_in
     if params[:title].empty? && params[:description].empty?
@@ -58,15 +57,6 @@ class TechsController < ApplicationController
       redirect "/techs/#{@tech.id}"
     end
   end
-
-  patch "/techs/:id" do
-   redirect_if_not_logged_in
-   @tech = Tech.find(params[:id])
-   unless !params[:title].empty? && !params[:description].empty?
-     redirect "/techs/#{@tech.id}/edit?error=invalid title or description"
-   end
-
- end
 
   delete '/techs/:id/delete' do
     if logged_in?
