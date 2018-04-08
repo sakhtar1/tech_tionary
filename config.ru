@@ -7,5 +7,5 @@ end
 
 use Rack::MethodOverride
 run ApplicationController
-use TechsController
+use WordsController
 use UsersController
