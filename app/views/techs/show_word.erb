@@ -1,0 +1,15 @@
+<h2> Tech Words: </h2>
+<h3><%= @tech.title %></h3>
+<br>
+<p><%= @tech.description %></p>
+
+<form method="post" action="/techs/<%=@tech.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete List">
+</form>
+
+  <br>
+  <a href="/techs/<%=@tech.id%>/edit">Edit Tech Words</a>
+  <br>
+  <br>
+  <a href="/techs">Techtionary HomePage</a>

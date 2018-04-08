@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TECHTIONARY!!</title>
+  </head>
+  <body>
+    <% if logged_in? %>
+       <a href="/techs/new"> Create List </a>
+       <br>
+       <a href="/logout"> Log-Out </a>
+       <br>
+       <a href="/techs">HomePage</a>
+       <br>
+       <p>Hello, <%=current_user.username %>!</p>
+     <%end %>
+
+      <h2><%= yield %></h2>
+
+
+  </body>
+</html>

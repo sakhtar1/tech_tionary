@@ -1,0 +1,19 @@
+<h3> Edit Word</h3>
+
+<form action="/techs/<%=@tech.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+  <label>Word Name:</label>
+  <br>
+  <input id="name" name="name" type="text" value="<%=@tech.title%>">
+
+  <h3> Edit Descriptions</h3>
+
+  <input id="description" type="text" name="description" value="<%=@tech.description%>">
+  <br>
+  <br>
+
+  <button type="submit">Edit Tech Word</button>
+</form>
+<br>
+<br>

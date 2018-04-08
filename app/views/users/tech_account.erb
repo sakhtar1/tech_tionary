@@ -1,0 +1,6 @@
+<h3> Hello, <%=@user.username %></h3>
+<h4> Techtionary Words </h4>
+<p><% @user.techs.each do |tech| %>
+      <a href="/techs/<%=tech.id%>"><%= tech.title %>
+        <%= tech.description %>
+    <%end%></p>
