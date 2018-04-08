@@ -17,7 +17,7 @@ class TechsController < ApplicationController
     end
   end
 
-  get '/tweets/:id' do
+  get '/techs/:id' do
     if logged_in?
       @tech = Tech.find_by_id(params[:id])
       erb :'techs/show_word'
