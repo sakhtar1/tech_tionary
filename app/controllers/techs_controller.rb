@@ -1,12 +1,9 @@
 class TechsController < ApplicationController
 
   get '/techs' do
-    if logged_in?
-      @techs = Tech.all
-      erb :'users/tech_account'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @techs = Tech.all
+    erb :'/techs/techs'
   end
 
   get '/techs/new' do
@@ -18,7 +15,7 @@ class TechsController < ApplicationController
 
  post "/techs" do
    redirect_if_not_logged_in
-   unless !params[:title].empty? && !params[:description].empty?
+   if params[:title]=="" && params[:description]==""
      redirect "techs/new?error=invalid title or description"
    end
    Tech.create(params)
@@ -49,7 +46,7 @@ class TechsController < ApplicationController
 
   patch '/techs/:id' do
     redirect_if_not_logged_in
-    if params[:title].empty? && params[:description].empty?
+    if params[:title]=="" && params[:description]==""
       redirect "/techs/#{@tech.id}/edit?error=invalid title or description"
     else
       @tech = Tech.find(params[:id])
