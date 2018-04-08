@@ -20,8 +20,8 @@ class WordsController < ApplicationController
      redirect "words/new?error=invalid title or description"
    end
    @user = User.find_by(id: session[:user_id])
-   Word.create(title: params[:title], description: params[:description], user_id: @user.id )
-   redirect "/words"
+   @word = Word.create(title: params[:title], description: params[:description], user_id: @user.id )
+   redirect "/words/#{@word.id}"
  end
 
   get '/words/:id' do

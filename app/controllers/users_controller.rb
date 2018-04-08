@@ -1,9 +1,5 @@
-class UsersController < ApplicationController
 
-  get '/users/:id' do
-    @user = User.find_by(id: session[:user_id])
-    erb :'users/word_account'
-  end
+class UsersController < ApplicationController
 
   get "/signup" do
     if !logged_in?
