@@ -4,7 +4,6 @@ class WordsController < ApplicationController
   get '/words' do
     redirect_if_not_logged_in
     @words = Word.all
-
     erb :'/words/words'
   end
 
@@ -20,30 +19,24 @@ class WordsController < ApplicationController
    if params[:title]=="" && params[:description]==""
      redirect "words/new?error=invalid title or description"
    end
-   Word.create(title: params[:title], description: params[:description])
+   @user = User.find_by(id: session[:user_id])
+   Word.create(title: params[:title], description: params[:description], user_id: @user.id )
    redirect "/words"
  end
 
   get '/words/:id' do
-    if logged_in?
-      @word = Word.find_by_id(params[:id])
-      erb :'words/show_word'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @word = Word.find_by_id(params[:id])
+    erb :'words/show_word'
   end
 
   get '/words/:id/edit' do
-    if logged_in?
-      @word = Word.find_by_id(params[:id])
-      binding.pry
-      if @word && @word.user == current_user
-        erb :'words/edit'
-      else
-        redirect '/words'
-      end
+    redirect_if_not_logged_in
+    @word = Word.find_by_id(params[:id])
+    if @word && @word.user == current_user
+      erb :'words/edit'
     else
-      redirect '/login'
+      redirect '/words'
     end
   end
 

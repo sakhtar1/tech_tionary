@@ -1,6 +1,6 @@
 <h3> Hello, <%=current_user.username %></h3>
 <h4> Techtionary Words </h4>
-<p><% @user.words.each do |tech| %>
-      <a href="/words/<%=tech.id%>"><%= word.title %>
+<p><% @user.words.each do |word| %>
+      <a href="/words/<%=word.id%>"><%= word.title %>
         <%= word.description %>
     <%end%></p>
