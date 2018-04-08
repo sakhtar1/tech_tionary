@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/users/:id' do
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by(id: session[:user_id])
     erb :'users/tech_account'
   end
 

@@ -3,12 +3,10 @@
 <form action="/techs/<%=@tech.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-  <label>Word Name:</label>
-  <br>
+  <p><label> Word Title: </p>
   <input id="name" name="name" type="text" value="<%=@tech.title%>">
 
-  <h3> Edit Descriptions</h3>
-
+  <p><label> Word Description: </p>
   <input id="description" type="text" name="description" value="<%=@tech.description%>">
   <br>
   <br>

@@ -17,6 +17,20 @@ class TechsController < ApplicationController
     end
   end
 
+  post'/techs' do
+    if logged_in?
+      if params[:title].empty?
+        redirect "/techs/new"
+      else
+        @user = User.find_by(id: session[:user_id])
+        @tech = Tech.create(title: params[:title], description: params[:description], user_id: @user.id)
+        redirect to "/techs"
+      end
+     else
+      redirect '/login'
+     end
+  end
+
   get '/techs/:id' do
     if logged_in?
       @tech = Tech.find_by_id(params[:id])
@@ -39,24 +53,11 @@ class TechsController < ApplicationController
     end
   end
 
-  post'/techs' do
-    if logged_in?
-      if params[:tech][:title].empty? && params[:tech][:description].empty?
-        redirect "/techs/new"
-      else
-        @user = User.find_by(id: session[:user_id])
-        @tech = Tech.create(title: params[:title], description: params[:description], user_id: @user.id)
-        redirect to "/techs"
-      end
-     else
-      redirect '/login'
-     end
-  end
 
   patch '/techs/:id' do
     if logged_in?
-      if params[:tech][:title].empty? && params[:tech][:description].empty?
-        redirect "/techs/#{params[:id]}/edit"
+      if params [:title].empty?
+        redirect "/techs/#{@tech.id}}/edit"
       else
         @tech = Tech.find_by_id(params[:id])
         if @tech && @tech.user = current_user
