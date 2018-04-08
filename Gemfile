@@ -13,7 +13,10 @@ gem 'bcrypt'
 gem "tux"
 gem "rack-flash3"
 gem 'simplecov'
-gem 'rspec'
-gem 'capybara'
-gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
-gem 'rack-test'
+
+group :test do
+  gem 'rspec'
+  gem 'capybara'
+  gem 'rack-test'
+  gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
+end

@@ -3,33 +3,27 @@ class TechsController < ApplicationController
   get '/techs' do
     if logged_in?
       @techs = Tech.all
-      erb :'techs/techs'
+      erb :'users/tech_account'
     else
       redirect '/login'
     end
   end
 
   get '/techs/new' do
-    if logged_in?
-      erb :'/techs/new'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    erb :'techs/new'
   end
 
-  post'/techs' do
-    if logged_in?
-      if params[:title].empty?
-        redirect "/techs/new"
-      else
-        @user = User.find_by(id: session[:user_id])
-        @tech = Tech.create(title: params[:title], description: params[:description], user_id: @user.id)
-        redirect to "/techs"
-      end
-     else
-      redirect '/login'
-     end
-  end
+
+ post "/techs" do
+   redirect_if_not_logged_in
+   unless !params[:title].empty? && !params[:description].empty?
+     redirect "techs/new?error=invalid title or description"
+   end
+   Tech.create(params)
+   redirect "/techs"
+ end
 
   get '/techs/:id' do
     if logged_in?
@@ -55,26 +49,24 @@ class TechsController < ApplicationController
 
 
   patch '/techs/:id' do
-    if logged_in?
-      if params [:title].empty?
-        redirect "/techs/#{@tech.id}}/edit"
-      else
-        @tech = Tech.find_by_id(params[:id])
-        if @tech && @tech.user = current_user
-          if @tech.update(:title => params[:title], :description => params[:description])
-            redirect to "/techs/#{@tech.id}"
-          else
-          redirect to "/techs/#{@tech.id}/edit"
-          end
-        else
-          redirect to '/techs'
-        end
-      end
+    redirect_if_not_logged_in
+    if params[:title].empty? && params[:description].empty?
+      redirect "/techs/#{@tech.id}/edit?error=invalid title or description"
     else
-      redirect '/login'
+      @tech = Tech.find(params[:id])
+      @tech.update(params.select{|t|t=="title" || t=="description" || t=="user_id"})
+      redirect "/techs/#{@tech.id}"
     end
   end
 
+  patch "/techs/:id" do
+   redirect_if_not_logged_in
+   @tech = Tech.find(params[:id])
+   unless !params[:title].empty? && !params[:description].empty?
+     redirect "/techs/#{@tech.id}/edit?error=invalid title or description"
+   end
+
+ end
 
   delete '/techs/:id/delete' do
     if logged_in?
