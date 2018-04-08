@@ -1,12 +1,12 @@
-<h3> Edit Word</h3>
+<h3> Edit Tech-Word</h3>
 
 <form action="/techs/<%=@tech.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-  <p><label> Word Title: </p>
+  <p><label> Name: </p>
   <input id="name" name="name" type="text" value="<%=@tech.title%>">
 
-  <p><label> Word Description: </p>
+  <p><label> Tech-cription: </p>
   <input id="description" type="text" name="description" value="<%=@tech.description%>">
   <br>
   <br>

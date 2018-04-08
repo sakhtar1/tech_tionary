@@ -2,8 +2,11 @@
 <html>
   <head>
     <title>Techtionary</title>
+    <br>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
+  <div class="container">
     <% if logged_in? %>
        <a href="/techs/new"> Create Tech-Word </a>
        <br>
@@ -11,10 +14,15 @@
        <br>
        <a href="/techs">HomePage</a>
        <br>
+       <br>
        <p>Hello, <%=current_user.username %>!</p>
      <%end %>
+    </div>
+     <div class="container">
+       <h1>Techtionary</h1>
+       <%= yield %>
+     </div>
 
-      <h2><%= yield %></h2>
 
 
   </body>
