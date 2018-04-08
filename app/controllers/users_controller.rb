@@ -1,9 +1,14 @@
 
 class UsersController < ApplicationController
 
+get '/users/:id' do
+    @user = User.find_by(id: session[:user_id])
+    erb :'users/word_account'
+  end
+
   get "/signup" do
     if !logged_in?
-		   erb :"users/signup"
+	erb :"users/signup"
     else
       redirect '/words'
     end
@@ -14,6 +19,7 @@ class UsersController < ApplicationController
         redirect "/signup"
     else
       @user = User.create(:username => params[:username], :email => params[:email],:password => params[:password])
+      @user.save
       session[:user_id] = @user.id
       redirect "/words"
     end
@@ -21,29 +27,29 @@ class UsersController < ApplicationController
 
   get "/login" do
     if !logged_in?
-		    erb :"users/login"
+	erb :"users/login"
     else
       redirect '/words'
     end
 	end
 
   post "/login" do
-		 @user = User.find_by(:username => params[:username])
-		 if @user && @user.authenticate(params[:password])
-			 session[:user_id] = @user.id
+   @user = User.find_by(:username => params[:username])
+   if @user && @user.authenticate(params[:password])
+     session[:user_id] = @user.id
       redirect "/words"
-     else
+   else
       redirect "/signup"
-		end
-	end
+   end
+  end
 
   get "/logout" do
     if logged_in?
-  		session.clear
-  		redirect "/login"
+  	session.clear
+  	redirect "/login"
     else
       redirect "/"
     end
-	end
+   end
 
 end
