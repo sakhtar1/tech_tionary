@@ -3,13 +3,13 @@ class WordsController < ApplicationController
 
   get '/words' do
     redirect_if_not_logged_in
+    @user = User.find_by(id: session[:user_id])
     @words = Word.all
-    erb :'/words/words'
+    erb :'words/words'
   end
 
   get '/words/new' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     erb :'words/new'
   end
 
@@ -27,7 +27,9 @@ class WordsController < ApplicationController
   get '/words/:id' do
     redirect_if_not_logged_in
     @word = Word.find_by_id(params[:id])
-    erb :'words/show_word'
+    if @word && @word.user == current_user
+      erb :'words/show_word'
+    end
   end
 
   get '/words/:id/edit' do
@@ -46,8 +48,12 @@ class WordsController < ApplicationController
       redirect "/words/#{@word.id}/edit?error=invalid title or description"
     else
       @word = Word.find(params[:id])
-      @word.update(params.select{|t|t=="title" || t=="description" || t=="user_id"})
-      redirect "/words/#{@word.id}"
+      if @word && @word.user == current_user
+        @word.update(params.select{|t|t=="title" || t=="description" || t=="user_id"})
+        redirect "/words/#{@word.id}"
+      else
+        redirect to "/tweets/#{@tweet.id}/edit?error=invalid title or description"
+      end
     end
   end
 

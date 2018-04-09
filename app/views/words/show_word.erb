@@ -1,7 +1,9 @@
 <h2> Tech Words: </h2>
 <h3><%= @word.title %></h3>
-<br>
+
 <p><%= @word.description %></p>
+<br>
+
 
 <form method="post" action="/words/<%=@word.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">

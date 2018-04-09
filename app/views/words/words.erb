@@ -1,4 +1,4 @@
 <h3>Tech Words</h3>
-<ol><% @words.each do |word| %>
+<ol><% @user.words.each do |word| %>
       <li><a href="/words/<%=word.id%>"><%= word.title %></li>
     <%end%></ol>
