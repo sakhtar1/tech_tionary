@@ -1,6 +1,7 @@
 require 'pry'
+require 'rack-flash'
 class WordsController < ApplicationController
-
+  use Rack::Flash
   get '/words' do
     redirect_if_not_logged_in
     @user = User.find_by(id: session[:user_id])
@@ -21,6 +22,7 @@ class WordsController < ApplicationController
    end
    @user = User.find_by(id: session[:user_id])
    @word = Word.create(title: params[:title], description: params[:description], user_id: @user.id )
+     flash[:message] = "Successfully created Tech-Word!"
    redirect "/words/#{@word.id}"
  end
 
