@@ -52,7 +52,7 @@ class WordsController < ApplicationController
         @word.update(params.select{|t|t=="title" || t=="description" || t=="user_id"})
         redirect "/words/#{@word.id}"
       else
-        redirect to "/tweets/#{@tweet.id}/edit?error=invalid title or description"
+        redirect to "/words/#{@word.id}/edit?error=invalid title or description"
       end
     end
   end
