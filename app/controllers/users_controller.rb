@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   get "/login" do
     if !logged_in?
-	erb :"users/login"
+	      erb :"users/login"
     else
       redirect '/words'
     end
@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   get "/logout" do
     if logged_in?
   	session.clear
+    #session.destroy << for CRUD delete
   	redirect "/login"
     else
       redirect "/"
