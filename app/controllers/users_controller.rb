@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
 
   get '/users/:id' do
@@ -15,7 +16,8 @@ class UsersController < ApplicationController
 
   post "/signup" do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
-        redirect "/signup?error=please fill out all edit fields"
+      flash[:message] = "Please fill in all edit fields!"
+        redirect "/signup"
     else
       @user = User.create(:username => params[:username], :email => params[:email],:password => params[:password])
       @user.save
