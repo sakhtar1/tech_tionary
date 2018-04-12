@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   get "/signup" do
     if !logged_in?
-	erb :"users/signup"
+	     erb :"users/signup"
     else
       redirect '/words'
     end

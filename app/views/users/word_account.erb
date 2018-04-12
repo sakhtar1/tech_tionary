@@ -1,5 +1,8 @@
-
 <h3> Hello, <%=current_user.username %></h3>
+<h5>We know tech jargons can be a lot to intake at once. </h5>
+<h5>That's why here at Techtionary, we make it simple for you, you can create your own tech - dictionary!</h5>
+<h5>To start your techtionary and add a tech word click <a href="/words/new">here</a>!</h5>
+<h5>To view your tech words click <a href="/words/words">here</a>!</h5>
 <h4> Techtionary Words </h4>
 <p><% @user.words.each do |word| %>
       <a href="/words/<%=word.id%>"><%= word.title %>

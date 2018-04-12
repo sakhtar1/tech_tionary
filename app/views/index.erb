@@ -1,9 +1,12 @@
 <% if !logged_in? %>
   <h3>Welcome to Techtionary!!</h3>
-  <h3><a href="/signup">Sign-Up</a> to learn more!</h3>
+  <h3>We know tech jargons can be a lot to intake at once.</h3>
+  <h3>That's why here at Techtionary you can create your own tech-dictionary!</h3>
+  <h3><a href="/signup">Sign-Up</a> to create your own Techtionary!</h3>
   <h3>Have an account? <a href="/login"> Sign In </a></h3>
 <%else %>
-  <h5>We know tech jargons can be a lot to intake at once. That's why you can create your own techtionary!</h5>
-  <h5>To add a tech word to your tech-tionary click <a href="/words/new">here</a>!</h5>
+  <h5>We know tech jargons can be a lot to intake at once. </h5>
+  <h5>That's why here at Techtionary, we make it simple for you, you can create your own tech - dictionary!</h5>
+  <h5>To start your techtionary and add a tech word click <a href="/words/new">here</a>!</h5>
   <h5>To view your tech words click <a href="/words/words">here</a>!</h5>
 <%end %>
